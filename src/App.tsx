@@ -47,7 +47,13 @@ export default function App() {
   useEffect(() => {
     const timerId = setInterval(() => {
       const now = new Date();
-      setCurrentTimeText(now.toLocaleTimeString());
+      // Format to Japan Standard Time (JST)
+      setCurrentTimeText(
+        now.toLocaleTimeString("ja-JP", {
+          timeZone: "Asia/Tokyo",
+          hour12: false,
+        })
+      );
     }, 1000);
     return () => clearInterval(timerId);
   }, []);
@@ -174,7 +180,7 @@ export default function App() {
 
             <div className="hidden md:flex items-center gap-2 font-mono text-[11px] text-zinc-300 border border-white/10 bg-white/5 px-3.5 py-1.5 rounded-xl select-none">
               <Clock className="w-3.5 h-3.5 text-pink-400 animate-spin-slow" />
-              <span>TIME_UTC: <strong className="text-cyan-405 font-bold">{currentTimeText}</strong></span>
+              <span>TIME_JST: <strong className="text-cyan-400 font-bold">{currentTimeText}</strong></span>
             </div>
           </div>
         </div>
